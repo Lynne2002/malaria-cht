@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@medic/eslint-config": "^1.1.0"
+  }
+}
