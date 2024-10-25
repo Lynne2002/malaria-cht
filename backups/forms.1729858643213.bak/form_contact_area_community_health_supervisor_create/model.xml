@@ -1,0 +1,40 @@
+
+  <model>
+    <instance>
+        <data xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" id="form:contact:area_community_health_supervisor:create" prefix="J1!form:contact:area_community_health_supervisor:create!" delimiter="#" version="2023-11-29  22-41">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <user>
+              <contact_id/>
+              <facility_id/>
+              <name/>
+            </user>
+          </inputs>
+          <area_community_health_supervisor>
+            <parent>PARENT</parent>
+            <type>contact</type>
+            <contact_type>area_community_health_supervisor</contact_type>
+            <name/>
+            <phone/>
+            <phone_alternate/>
+            <notes/>
+            <meta tag="hidden">
+              <created_by/>
+              <created_by_person_uuid/>
+              <created_by_place_uuid/>
+            </meta>
+          </area_community_health_supervisor>
+          <meta tag="hidden">
+            <instanceID/>
+          </meta>
+        </data>
+      </instance>
+  </model>
+

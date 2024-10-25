@@ -1,0 +1,59 @@
+
+  <model>
+    <instance>
+        <data xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" id="contact:household_member:edit" prefix="J1!contact:household_member:edit!" delimiter="#" version="2023-06-02  12-19">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <user>
+              <contact_id/>
+              <facility_id/>
+              <name/>
+            </user>
+          </inputs>
+          <household_member>
+            <parent>PARENT</parent>
+            <type>contact</type>
+            <contact_type>household_member</contact_type>
+            <name/>
+            <display_name/>
+            <notes/>
+            <sex/>
+            <date_of_birth/>
+            <age_set/>
+            <dob_known/>
+            <dob_calendar/>
+            <age_years/>
+            <age_months/>
+            <ephemeral_months/>
+            <ephemeral_years/>
+            <dob_approx/>
+            <dob_raw/>
+            <dob_iso/>
+            <person_age_years/>
+            <person_age_months/>
+            <n_age/>
+            <phone/>
+            <secondary_phone/>
+            <relationship_to_primary_caregiver/>
+            <relationship_to_pc_other/>
+            <n_screening/>
+            <meta tag="hidden">
+              <created_by/>
+              <created_by_person_uuid/>
+              <created_by_place_uuid/>
+            </meta>
+          </household_member>
+          <meta tag="hidden">
+            <instanceID/>
+          </meta>
+        </data>
+      </instance>
+  </model>
+
