@@ -297,8 +297,8 @@
       <bind nodeset="/data/household_member/date_of_birth" type="string" calculate="../dob_iso"/>
       <bind nodeset="/data/household_member/age_set" type="select1" required="true()"/>
       <bind nodeset="/data/household_member/dob_known" type="select1" relevant="../age_set = 'over5'" required="true()"/>
-      <bind nodeset="/data/household_member/dob_calendar" type="date" constraint="floor(decimal-date-time(.)) &lt;= floor(decimal-date-time(today())) and floor( difference-in-months( . , today() ) div 12 ) &lt;= 100" relevant="../age_set = 'under5' or ../dob_known = 'yes'" jr:constraintMsg="Age must be between 0 and 100" required="true()"/>
-      <bind nodeset="/data/household_member/age_years" type="int" constraint=". &gt;= 0 and . &lt;=100" relevant="../age_set = 'over5' and ../dob_known = 'no'" jr:constraintMsg="Age must be between 0 and 100" required="true()"/>
+      <bind nodeset="/data/household_member/dob_calendar" type="date" constraint="floor(decimal-date-time(.)) &lt;= floor(decimal-date-time(today())) and floor( difference-in-months( . , today() ) div 12 ) &lt;= 100" relevant="../age_set = 'under5' or ../dob_known = 'yes'" required="true()" jr:constraintMsg="Age must be between 0 and 100"/>
+      <bind nodeset="/data/household_member/age_years" type="int" constraint=". &gt;= 0 and . &lt;=100" relevant="../age_set = 'over5' and ../dob_known = 'no'" required="true()" jr:constraintMsg="Age must be between 0 and 100"/>
       <bind nodeset="/data/household_member/age_months" type="string" calculate="0"/>
       <bind nodeset="/data/household_member/ephemeral_months" type="string" calculate="if(format-date-time(today(),&quot;%m&quot;) - ../age_months &lt; 0, format-date-time(today(),&quot;%m&quot;) - ../age_months + 12, format-date-time(today(),&quot;%m&quot;) - ../age_months)"/>
       <bind nodeset="/data/household_member/ephemeral_years" type="string" calculate="if(format-date-time(today(),&quot;%m&quot;) - ../age_months &lt; 0, format-date-time(today(),&quot;%Y&quot;) - ../age_years - 1, format-date-time(today(),&quot;%Y&quot;) -../age_years)"/>

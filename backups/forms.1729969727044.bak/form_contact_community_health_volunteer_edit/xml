@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms">
   <h:head>
-    <h:title>New Community Health Volunteer</h:title>
+    <h:title>Edit Community Health Volunteer</h:title>
     <model>
       <itext>
         <translation lang="en">
@@ -35,7 +35,7 @@
             <value>Kiume</value>
           </text>
           <text id="/data/community_health_volunteer/gender:label">
-            <value>Namba ya Simi</value>
+            <value>Jinsia</value>
           </text>
           <text id="/data/community_health_volunteer/meta:label">
             <value>-</value>
@@ -49,7 +49,7 @@
         </translation>
       </itext>
       <instance>
-        <data id="contact:community_health_volunteer:create" prefix="J1!contact:community_health_volunteer:create!" delimiter="#" version="2023-06-07  12-34">
+        <data id="contact:community_health_volunteer:edit" prefix="J1!contact:community_health_volunteer:edit!" delimiter="#" version="2023-06-02  12-55">
           <inputs>
             <meta>
               <location>
@@ -93,15 +93,15 @@
       <bind nodeset="/data/community_health_volunteer/contact_type" type="string"/>
       <bind nodeset="/data/community_health_volunteer/name" type="string" required="true()"/>
       <bind nodeset="/data/community_health_volunteer/gender" type="select1" required="true()"/>
-      <bind nodeset="/data/community_health_volunteer/dob" type="date" jr:constraintMsg="Age must be between 18 and 100" constraint="floor( difference-in-months( . , today() ) div 12 ) &gt;=18 and floor( difference-in-months( . , today() ) div 12 ) &lt;= 100" required="true()"/>
-      <bind nodeset="/data/community_health_volunteer/primary_phone" type="tel" jr:constraintMsg="Please enter a valid local number, or use the standard international format, which includes a plus sign (+) and country code. For example: +254712345678" constraint="true()" required="true()"/>
+      <bind nodeset="/data/community_health_volunteer/dob" type="date" required="true()"/>
+      <bind nodeset="/data/community_health_volunteer/primary_phone" type="tel" constraint="true()" required="true()" jr:constraintMsg="Please enter a valid local number, or use the standard international format, which includes a plus sign (+) and country code. For example: +254712345678"/>
       <bind nodeset="/data/community_health_volunteer/meta/created_by" type="string" calculate="../../../inputs/user/name"/>
       <bind nodeset="/data/community_health_volunteer/meta/created_by_person_uuid" type="string" calculate="../../../inputs/user/contact_id"/>
       <bind nodeset="/data/community_health_volunteer/meta/created_by_place_uuid" type="string" calculate="../../../inputs/user/facility_id"/>
       <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
     </model>
   </h:head>
-  <h:body class="pages">
+  <h:body>
     <group ref="/data/inputs">
       <group ref="/data/inputs/user">
         <input ref="/data/inputs/user/contact_id"/>

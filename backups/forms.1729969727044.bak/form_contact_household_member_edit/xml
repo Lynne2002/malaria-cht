@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms">
   <h:head>
-    <h:title>New Household Member</h:title>
+    <h:title>Edit House Hold Member</h:title>
     <model>
       <itext>
         <translation lang="en">
@@ -40,6 +40,9 @@
           </text>
           <text id="/data/household_member/n_age:label">
             <value>AGE: <output value=" /data/household_member/person_age_years "/> <output value=" /data/household_member/dob_iso "/></value>
+          </text>
+          <text id="/data/household_member/n_screening:label">
+            <value>_**Please submit monthly screening form for <output value=" /data/household_member/display_name "/> after submitting this person registration.**_</value>
           </text>
           <text id="/data/household_member/name:hint">
             <value>Please use three names.</value>
@@ -151,8 +154,14 @@
           <text id="/data/household_member/ephemeral_years:label">
             <value>-</value>
           </text>
+          <text id="/data/household_member/meta:label">
+            <value>-</value>
+          </text>
           <text id="/data/household_member/n_age:label">
             <value>UMRI: <output value=" /data/household_member/person_age_years "/> <output value=" /data/household_member/dob_iso "/></value>
+          </text>
+          <text id="/data/household_member/n_screening:label">
+            <value>_**Tafadhali wasilisha fomu ya uchunguzi wa kila mwezi kwa <output value=" /data/household_member/display_name "/> baada ya kuwasilisha usajili wa mtu huyu.**_</value>
           </text>
           <text id="/data/household_member/name:hint">
             <value>-</value>
@@ -214,10 +223,13 @@
           <text id="/data/household_member/sex:label">
             <value>Jinsia</value>
           </text>
+          <text id="/data/household_member:label">
+            <value>Mtu Mpya</value>
+          </text>
         </translation>
       </itext>
       <instance>
-        <data id="contact:household_member:create" prefix="J1!contact:household_member:create!" delimiter="#" version="2023-11-29  10-14">
+        <data id="contact:household_member:edit" prefix="J1!contact:household_member:edit!" delimiter="#" version="2023-06-02  12-19">
           <inputs>
             <meta>
               <location>
@@ -236,7 +248,7 @@
           <household_member>
             <parent>PARENT</parent>
             <type>contact</type>
-            <contact_type>household_contact</contact_type>
+            <contact_type>household_member</contact_type>
             <name/>
             <display_name/>
             <notes/>
@@ -259,13 +271,11 @@
             <secondary_phone/>
             <relationship_to_primary_caregiver/>
             <relationship_to_pc_other/>
+            <n_screening/>
             <meta tag="hidden">
               <created_by/>
               <created_by_person_uuid/>
               <created_by_place_uuid/>
-              <last_edited_by/>
-              <last_edited_by_person_uuid/>
-              <last_edited_by_place_uuid/>
             </meta>
           </household_member>
           <meta tag="hidden">
@@ -287,8 +297,8 @@
       <bind nodeset="/data/household_member/date_of_birth" type="string" calculate="../dob_iso"/>
       <bind nodeset="/data/household_member/age_set" type="select1" required="true()"/>
       <bind nodeset="/data/household_member/dob_known" type="select1" relevant="../age_set = 'over5'" required="true()"/>
-      <bind nodeset="/data/household_member/dob_calendar" type="date" relevant="../age_set = 'under5' or ../dob_known = 'yes'" constraint="floor(decimal-date-time(.)) &lt;= floor(decimal-date-time(today())) and floor( difference-in-months( . , today() ) div 12 ) &lt;= 100" jr:constraintMsg="Age must be between 0 and 100" required="true()"/>
-      <bind nodeset="/data/household_member/age_years" type="int" relevant="../age_set = 'over5' and ../dob_known = 'no'" constraint=". &gt;= 0 and . &lt;=100" jr:constraintMsg="Age must be between 0 and 100" required="true()"/>
+      <bind nodeset="/data/household_member/dob_calendar" type="date" constraint="floor(decimal-date-time(.)) &lt;= floor(decimal-date-time(today())) and floor( difference-in-months( . , today() ) div 12 ) &lt;= 100" relevant="../age_set = 'under5' or ../dob_known = 'yes'" jr:constraintMsg="Age must be between 0 and 100" required="true()"/>
+      <bind nodeset="/data/household_member/age_years" type="int" constraint=". &gt;= 0 and . &lt;=100" relevant="../age_set = 'over5' and ../dob_known = 'no'" jr:constraintMsg="Age must be between 0 and 100" required="true()"/>
       <bind nodeset="/data/household_member/age_months" type="string" calculate="0"/>
       <bind nodeset="/data/household_member/ephemeral_months" type="string" calculate="if(format-date-time(today(),&quot;%m&quot;) - ../age_months &lt; 0, format-date-time(today(),&quot;%m&quot;) - ../age_months + 12, format-date-time(today(),&quot;%m&quot;) - ../age_months)"/>
       <bind nodeset="/data/household_member/ephemeral_years" type="string" calculate="if(format-date-time(today(),&quot;%m&quot;) - ../age_months &lt; 0, format-date-time(today(),&quot;%Y&quot;) - ../age_years - 1, format-date-time(today(),&quot;%Y&quot;) -../age_years)"/>
@@ -298,20 +308,18 @@
       <bind nodeset="/data/household_member/person_age_years" type="string" calculate="floor( difference-in-months( ../dob_iso, today() ) div 12 )"/>
       <bind nodeset="/data/household_member/person_age_months" type="string" calculate="floor(difference-in-months( ../dob_iso, today() ))"/>
       <bind nodeset="/data/household_member/n_age" readonly="true()" type="string" relevant="false()"/>
-      <bind nodeset="/data/household_member/phone" type="tel" relevant=" /data/household_member/person_age_years  &gt;=10" constraint="1" jr:constraintMsg="Please make sure the number is not already in use by another person and is in the format 07XX XXX XXX"/>
-      <bind nodeset="/data/household_member/secondary_phone" type="tel" relevant=" /data/household_member/person_age_years  &gt;=10" constraint="1" jr:constraintMsg="Please make sure the number is not already in use by another person and is in the format 07XX XXX XXX"/>
+      <bind nodeset="/data/household_member/phone" type="tel" constraint="1" relevant=" /data/household_member/person_age_years  &gt;=10" jr:constraintMsg="Please make sure the number is not already in use by another person and is in the format 07XX XXX XXX"/>
+      <bind nodeset="/data/household_member/secondary_phone" type="tel" constraint="1" relevant=" /data/household_member/person_age_years  &gt;=10" jr:constraintMsg="Please make sure the number is not already in use by another person and is in the format 07XX XXX XXX"/>
       <bind nodeset="/data/household_member/relationship_to_primary_caregiver" type="select1" required="true()"/>
       <bind nodeset="/data/household_member/relationship_to_pc_other" type="string" relevant="../relationship_to_primary_caregiver = 'other'" required="true()"/>
-      <bind nodeset="/data/household_member/meta/created_by" type="string"/>
-      <bind nodeset="/data/household_member/meta/created_by_person_uuid" type="string"/>
-      <bind nodeset="/data/household_member/meta/created_by_place_uuid" type="string"/>
-      <bind nodeset="/data/household_member/meta/last_edited_by" type="string" calculate="../../../inputs/user/name"/>
-      <bind nodeset="/data/household_member/meta/last_edited_by_person_uuid" type="string" calculate="../../../inputs/user/contact_id"/>
-      <bind nodeset="/data/household_member/meta/last_edited_by_place_uuid" type="string" calculate="../../../inputs/user/facility_id"/>
+      <bind nodeset="/data/household_member/n_screening" readonly="true()" type="string"/>
+      <bind nodeset="/data/household_member/meta/created_by" type="string" calculate="../../../inputs/user/name"/>
+      <bind nodeset="/data/household_member/meta/created_by_person_uuid" type="string" calculate="../../../inputs/user/contact_id"/>
+      <bind nodeset="/data/household_member/meta/created_by_place_uuid" type="string" calculate="../../../inputs/user/facility_id"/>
       <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" calculate="concat('uuid:', uuid())"/>
     </model>
   </h:head>
-  <h:body class="pages">
+  <h:body>
     <group ref="/data/inputs">
       <group ref="/data/inputs/user">
         <input ref="/data/inputs/user/contact_id"/>
@@ -320,6 +328,7 @@
       </group>
     </group>
     <group appearance="field-list" ref="/data/household_member">
+      <label ref="jr:itext('/data/household_member:label')"/>
       <input ref="/data/household_member/name">
         <label ref="jr:itext('/data/household_member/name:label')"/>
         <hint ref="jr:itext('/data/household_member/name:hint')"/>
@@ -407,6 +416,9 @@
       </select1>
       <input ref="/data/household_member/relationship_to_pc_other">
         <label ref="jr:itext('/data/household_member/relationship_to_pc_other:label')"/>
+      </input>
+      <input ref="/data/household_member/n_screening">
+        <label ref="jr:itext('/data/household_member/n_screening:label')"/>
       </input>
       <group appearance="hidden" ref="/data/household_member/meta"/>
     </group>

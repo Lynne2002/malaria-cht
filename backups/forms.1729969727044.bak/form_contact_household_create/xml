@@ -588,19 +588,19 @@
       <bind nodeset="/data/input/user/name" type="string"/>
       <bind nodeset="/data/inputs/contact/init/conduct_registration" type="select1" required="true()"/>
       <bind nodeset="/data/inputs/contact/init/ensure" readonly="true()" type="string" relevant=" /data/inputs/contact/init/conduct_registration  = 'person'"/>
-      <bind nodeset="/data/inputs/contact/check/registered" type="select1" constraint="selected( /data/inputs/contact/check/registered ,'no')" required="true()" jr:constraintMsg="Please exit the workflow. The household is already registered !"/>
-      <bind nodeset="/data/inputs/contact/check/household_area" type="select1" required="true()" relevant="selected( /data/inputs/contact/check/registered , 'no')" jr:constraintMsg="This field is required"/>
-      <bind nodeset="/data/inputs/contact/check/serving_household" type="select1" required="true()" relevant="selected( /data/inputs/contact/check/household_area , 'no')" jr:constraintMsg="This field is required"/>
-      <bind nodeset="/data/inputs/contact/check/specify" type="string" required="true()" relevant="selected( /data/inputs/contact/check/serving_household , 'other')" jr:constraintMsg="This field is required"/>
+      <bind nodeset="/data/inputs/contact/check/registered" type="select1" jr:constraintMsg="Please exit the workflow. The household is already registered !" required="true()" constraint="selected( /data/inputs/contact/check/registered ,'no')"/>
+      <bind nodeset="/data/inputs/contact/check/household_area" type="select1" jr:constraintMsg="This field is required" required="true()" relevant="selected( /data/inputs/contact/check/registered , 'no')"/>
+      <bind nodeset="/data/inputs/contact/check/serving_household" type="select1" jr:constraintMsg="This field is required" required="true()" relevant="selected( /data/inputs/contact/check/household_area , 'no')"/>
+      <bind nodeset="/data/inputs/contact/check/specify" type="string" jr:constraintMsg="This field is required" required="true()" relevant="selected( /data/inputs/contact/check/serving_household , 'other')"/>
       <bind nodeset="/data/inputs/contact/contact_name" type="string" required="true()"/>
       <bind nodeset="/data/inputs/contact/g_sex" type="select1" required="true()"/>
       <bind nodeset="/data/inputs/contact/dob_known" type="select1" required="true()"/>
-      <bind nodeset="/data/inputs/contact/dob_calendar" type="date" constraint="floor( difference-in-months( . , today() ) div 12 ) &gt;=10 and floor( difference-in-months( . , today() ) div 12 ) &lt;= 100" required="true()" relevant="../dob_known = 'yes'" jr:constraintMsg="Age must be between 10 and 100"/>
-      <bind nodeset="/data/inputs/contact/age" type="int" constraint=". &gt;= 10 and . &lt;= 100" required="true()" relevant="../dob_known = 'no'" jr:constraintMsg="Age must be between 10 and 100"/>
+      <bind nodeset="/data/inputs/contact/dob_calendar" type="date" jr:constraintMsg="Age must be between 10 and 100" relevant="../dob_known = 'yes'" required="true()" constraint="floor( difference-in-months( . , today() ) div 12 ) &gt;=10 and floor( difference-in-months( . , today() ) div 12 ) &lt;= 100"/>
+      <bind nodeset="/data/inputs/contact/age" type="int" jr:constraintMsg="Age must be between 10 and 100" relevant="../dob_known = 'no'" required="true()" constraint=". &gt;= 10 and . &lt;= 100"/>
       <bind nodeset="/data/inputs/contact/dob_raw" type="string" calculate="if(../dob_known = 'yes', ../dob_calendar, format-date-time( decimal-date-time( today() ) - (365.25 * ../age) , &quot;%Y-%m-%d&quot;) )"/>
       <bind nodeset="/data/inputs/contact/contact_dob_iso" type="string" calculate="format-date-time(decimal-date-time(../dob_raw),&quot;%Y-%m-%d&quot;)"/>
-      <bind nodeset="/data/inputs/contact/pri_phone" type="string" constraint="regex(., '^(01\d{8}|07\d{8})$')" jr:constraintMsg="Please make sure the number is not already in use by another person and is in the format 07XX XXX XXX or 01XX XXX XXX."/>
-      <bind nodeset="/data/inputs/contact/sec_phone" type="string" constraint="regex(., '^(01\d{8}|07\d{8})$')" jr:constraintMsg="Please make sure the number is not already in use by another person and is in the format 07XX XXX XXX or 01XX XXX XXX."/>
+      <bind nodeset="/data/inputs/contact/pri_phone" type="string" jr:constraintMsg="Please make sure the number is not already in use by another person and is in the format 07XX XXX XXX or 01XX XXX XXX." constraint="regex(., '^(01\d{8}|07\d{8})$')"/>
+      <bind nodeset="/data/inputs/contact/sec_phone" type="string" jr:constraintMsg="Please make sure the number is not already in use by another person and is in the format 07XX XXX XXX or 01XX XXX XXX." constraint="regex(., '^(01\d{8}|07\d{8})$')"/>
       <bind nodeset="/data/inputs/contact/phone1" type="string" calculate=" /data/inputs/contact/pri_phone "/>
       <bind nodeset="/data/inputs/contact/phone2" type="string" calculate=" /data/inputs/contact/sec_phone "/>
       <bind nodeset="/data/inputs/contact/phone_note" readonly="true()" type="string"/>
@@ -622,7 +622,7 @@
       <bind nodeset="/data/contact/phone" type="string" calculate=" /data/inputs/contact/phone1 "/>
       <bind nodeset="/data/contact/geopoint" type="geopoint"/>
       <bind nodeset="/data/repeat-guard/other_household_members" type="select1"/>
-      <bind nodeset="/data/repeat-guard/child" type="select1" required="true()" relevant=" /data/repeat-guard/other_household_members  = 'yes'"/>
+      <bind nodeset="/data/repeat-guard/child" type="select1" relevant=" /data/repeat-guard/other_household_members  = 'yes'" required="true()"/>
       <bind nodeset="/data/repeat-guard/n_registration" readonly="true()" type="string" relevant="../child = 'true'"/>
       <bind nodeset="/data/repeat" relevant="/data/repeat-guard/child = 'true'"/>
       <bind nodeset="/data/repeat/child/delimiter" readonly="true()" type="string"/>
@@ -635,9 +635,9 @@
       <bind nodeset="/data/repeat/child/sex" type="select1" required="true()"/>
       <bind nodeset="/data/repeat/child/date_of_birth" type="string" calculate="../dob_iso"/>
       <bind nodeset="/data/repeat/child/age_set" type="select1" required="true()"/>
-      <bind nodeset="/data/repeat/child/dob_known" type="select1" required="true()" relevant="../age_set = 'over5'"/>
-      <bind nodeset="/data/repeat/child/dob_calendar" type="date" constraint="floor(decimal-date-time(.)) &lt;= floor(decimal-date-time(today())) and floor( difference-in-months( . , today() ) div 12 ) &lt;= 100" required="true()" relevant="../age_set = 'under5' or ../dob_known = 'yes'" jr:constraintMsg="Age must be between 0 and 100"/>
-      <bind nodeset="/data/repeat/child/age_years" type="int" constraint=". &gt;= 0 and . &lt;=100" required="true()" relevant="../age_set = 'over5' and ../dob_known = 'no'" jr:constraintMsg="Age must be between 0 and 100"/>
+      <bind nodeset="/data/repeat/child/dob_known" type="select1" relevant="../age_set = 'over5'" required="true()"/>
+      <bind nodeset="/data/repeat/child/dob_calendar" type="date" jr:constraintMsg="Age must be between 0 and 100" relevant="../age_set = 'under5' or ../dob_known = 'yes'" required="true()" constraint="floor(decimal-date-time(.)) &lt;= floor(decimal-date-time(today())) and floor( difference-in-months( . , today() ) div 12 ) &lt;= 100"/>
+      <bind nodeset="/data/repeat/child/age_years" type="int" jr:constraintMsg="Age must be between 0 and 100" relevant="../age_set = 'over5' and ../dob_known = 'no'" required="true()" constraint=". &gt;= 0 and . &lt;=100"/>
       <bind nodeset="/data/repeat/child/age_months" type="string" calculate="0"/>
       <bind nodeset="/data/repeat/child/ephemeral_months" type="string" calculate="if(format-date-time(today(),&quot;%m&quot;) - ../age_months &lt; 0, format-date-time(today(),&quot;%m&quot;) - ../age_months + 12, format-date-time(today(),&quot;%m&quot;) - ../age_months)"/>
       <bind nodeset="/data/repeat/child/ephemeral_years" type="string" calculate="if(format-date-time(today(),&quot;%m&quot;) - ../age_months &lt; 0, format-date-time(today(),&quot;%Y&quot;) - ../age_years - 1, format-date-time(today(),&quot;%Y&quot;) -../age_years)"/>
@@ -647,10 +647,10 @@
       <bind nodeset="/data/repeat/child/person_age_years" type="string" calculate="floor( difference-in-months( ../dob_iso, today() ) div 12 )"/>
       <bind nodeset="/data/repeat/child/person_age_months" type="string" calculate="floor(difference-in-months( ../dob_iso, today() ))"/>
       <bind nodeset="/data/repeat/child/n_age" readonly="true()" type="string" relevant="0"/>
-      <bind nodeset="/data/repeat/child/phone" type="string" constraint="regex(., '^(01\d{8}|07\d{8})$')" jr:constraintMsg="Please make sure the number is not already in use by another person and is in the format 07XX XXX XXX or 01XX XXX XXX."/>
-      <bind nodeset="/data/repeat/child/secs_phone" type="string" constraint="regex(., '^(01\d{8}|07\d{8})$')" jr:constraintMsg="Please make sure the number is not already in use by another person and is in the format 07XX XXX XXX or 01XX XXX XXX."/>
+      <bind nodeset="/data/repeat/child/phone" type="string" jr:constraintMsg="Please make sure the number is not already in use by another person and is in the format 07XX XXX XXX or 01XX XXX XXX." constraint="regex(., '^(01\d{8}|07\d{8})$')"/>
+      <bind nodeset="/data/repeat/child/secs_phone" type="string" jr:constraintMsg="Please make sure the number is not already in use by another person and is in the format 07XX XXX XXX or 01XX XXX XXX." constraint="regex(., '^(01\d{8}|07\d{8})$')"/>
       <bind nodeset="/data/repeat/child/relationship_to_primary_caregiver" type="select1" required="true()"/>
-      <bind nodeset="/data/repeat/child/relationship_to_pc_other" type="string" required="true()" relevant="../relationship_to_primary_caregiver = 'other'"/>
+      <bind nodeset="/data/repeat/child/relationship_to_pc_other" type="string" relevant="../relationship_to_primary_caregiver = 'other'" required="true()"/>
       <bind nodeset="/data/repeat/note" readonly="true()" type="string"/>
       <bind nodeset="/data/household/parent" type="string"/>
       <bind nodeset="/data/household/name" type="string" calculate="concat( /data/inputs/contact/contact_name , ' Household')"/>

@@ -763,9 +763,9 @@
       <bind nodeset="/data/PLACE_TYPE/contact/name" type="string"/>
       <bind nodeset="/data/PLACE_TYPE/contact/contact_name" type="string" calculate="../name"/>
       <bind nodeset="/data/PLACE_TYPE/contact/_id" type="db:person"/>
-      <bind nodeset="/data/PLACE_TYPE/is_name_generated" type="select1" calculate="if(  /data/PLACE_TYPE/generated_name  = ../name, 'true', 'false')" readonly="boolean( /data/PLACE_TYPE/contact/_id )" relevant="not( /data/PLACE_TYPE/contact/_id ) or selected( . , 'true') or boolean( /data/PLACE_TYPE/contact/_id )" required="true()"/>
+      <bind nodeset="/data/PLACE_TYPE/is_name_generated" type="select1" required="true()" relevant="not( /data/PLACE_TYPE/contact/_id ) or selected( . , 'true') or boolean( /data/PLACE_TYPE/contact/_id )" readonly="boolean( /data/PLACE_TYPE/contact/_id )" calculate="if(  /data/PLACE_TYPE/generated_name  = ../name, 'true', 'false')"/>
       <bind nodeset="/data/PLACE_TYPE/generated_name" type="string" calculate=" /data/init/generated_name_translation "/>
-      <bind nodeset="/data/PLACE_TYPE/name" type="string" relevant="boolean( /data/PLACE_TYPE/contact/_id ) or not( /data/PLACE_TYPE/contact/_id ) or not(selected( /data/PLACE_TYPE/is_name_generated , 'true')) or not(selected( /data/PLACE_TYPE/is_name_generated , 'yes'))" calculate="if( ( selected( /data/PLACE_TYPE/is_name_generated , 'true') or selected( /data/PLACE_TYPE/is_name_generated , 'yes') ),  /data/PLACE_TYPE/generated_name , .)" required="true()"/>
+      <bind nodeset="/data/PLACE_TYPE/name" type="string" required="true()" relevant="boolean( /data/PLACE_TYPE/contact/_id ) or not( /data/PLACE_TYPE/contact/_id ) or not(selected( /data/PLACE_TYPE/is_name_generated , 'true')) or not(selected( /data/PLACE_TYPE/is_name_generated , 'yes'))" calculate="if( ( selected( /data/PLACE_TYPE/is_name_generated , 'true') or selected( /data/PLACE_TYPE/is_name_generated , 'yes') ),  /data/PLACE_TYPE/generated_name , .)"/>
       <bind nodeset="/data/PLACE_TYPE/external_id" type="string"/>
       <bind nodeset="/data/PLACE_TYPE/use_cases" type="select" relevant="../type = 'health_center'"/>
       <bind nodeset="/data/PLACE_TYPE/vaccines" type="select" relevant="../type = 'health_center' and selected( /data/PLACE_TYPE/use_cases ,'imm')"/>
