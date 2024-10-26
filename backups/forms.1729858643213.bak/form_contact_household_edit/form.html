@@ -1,0 +1,16 @@
+<form autocomplete="off" novalidate="novalidate" class="or clearfix" dir="ltr" data-form-id="contact:household:edit">
+<section class="form-logo"></section><h3 dir="auto" id="form-title">Edit House Hold</h3>
+<select id="form-languages" data-default-lang=""><option value="en">en</option> <option value="sw">sw</option> </select>
+  
+  
+    <section class="or-group-data or-branch pre-init " name="/data/inputs" data-relevant="false()"><section class="or-group-data " name="/data/inputs/user"><label class="question non-select "><input type="text" name="/data/inputs/user/contact_id" data-type-xml="string"></label><label class="question non-select "><input type="text" name="/data/inputs/user/facility_id" data-type-xml="string"></label><label class="question non-select "><input type="text" name="/data/inputs/user/name" data-type-xml="string"></label>
+      </section>
+      </section>
+    <section class="or-group-data " name="/data/household"><label class="question non-select "><span lang="en" class="question-label active" data-itext-id="/data/household/name:label">Name</span><span lang="sw" class="question-label " data-itext-id="/data/household/name:label">-</span><input type="text" name="/data/household/name" data-type-xml="string"></label><label class="question non-select "><span lang="en" class="question-label active" data-itext-id="/data/household/geopoint:label">Location</span><span lang="sw" class="question-label " data-itext-id="/data/household/geopoint:label">Mahali</span><input type="text" name="/data/household/geopoint" data-type-xml="geopoint"></label><section class="or-group-data or-appearance-hidden " name="/data/household/meta">
+      </section>
+      </section>
+  
+<fieldset id="or-calculated-items" style="display:none;">
+<label class="calculation non-select "><input type="hidden" name="/data/household/meta/last_edited_by" data-calculate="../../../inputs/user/name" data-type-xml="string"></label><label class="calculation non-select "><input type="hidden" name="/data/household/meta/last_edited_by_person_uuid" data-calculate="../../../inputs/user/contact_id" data-type-xml="string"></label><label class="calculation non-select "><input type="hidden" name="/data/household/meta/last_edited_by_place_uuid" data-calculate="../../../inputs/user/facility_id" data-type-xml="string"></label><label class="calculation non-select "><input type="hidden" name="/data/meta/instanceID" data-calculate="concat('uuid:', uuid())" data-type-xml="string"></label>
+</fieldset>
+</form>

@@ -1,0 +1,27 @@
+<form autocomplete="off" novalidate="novalidate" class="or clearfix pages" dir="ltr" data-form-id="contact:community_health_volunteer:create">
+<section class="form-logo"></section><h3 dir="auto" id="form-title">New Community Health Volunteer</h3>
+<select id="form-languages" data-default-lang=""><option value="en">en</option> <option value="sw">sw</option> </select>
+  
+  
+    <section class="or-group-data or-branch pre-init " name="/data/inputs" data-relevant="false()"><section class="or-group-data " name="/data/inputs/user"><label class="question non-select "><input type="text" name="/data/inputs/user/contact_id" data-type-xml="string"></label><label class="question non-select "><input type="text" name="/data/inputs/user/facility_id" data-type-xml="string"></label><label class="question non-select "><input type="text" name="/data/inputs/user/name" data-type-xml="string"></label>
+      </section>
+      </section>
+    <section class="or-group-data or-appearance-field-list " name="/data/community_health_volunteer"><label class="question non-select "><span lang="en" class="question-label active" data-itext-id="/data/community_health_volunteer/name:label">Full Name</span><span lang="sw" class="question-label " data-itext-id="/data/community_health_volunteer/name:label">Jina Kamiri</span><span class="required">*</span><input type="text" name="/data/community_health_volunteer/name" data-required="true()" data-type-xml="string"><span class="or-required-msg active" lang="" data-i18n="constraint.required">This field is required</span></label><fieldset class="question simple-select ">
+<fieldset>
+<legend>
+<span lang="en" class="question-label active" data-itext-id="/data/community_health_volunteer/gender:label">Gender</span><span lang="sw" class="question-label " data-itext-id="/data/community_health_volunteer/gender:label">Namba ya Simi</span><span class="required">*</span>
+          </legend>
+<div class="option-wrapper">
+<label class=""><input type="radio" name="/data/community_health_volunteer/gender" data-name="/data/community_health_volunteer/gender" value="male" data-required="true()" data-type-xml="select1"><span lang="en" class="option-label active" data-itext-id="/data/community_health_volunteer/gender/male:label">Male</span><span lang="sw" class="option-label " data-itext-id="/data/community_health_volunteer/gender/male:label">Kiume</span></label><label class=""><input type="radio" name="/data/community_health_volunteer/gender" data-name="/data/community_health_volunteer/gender" value="female" data-required="true()" data-type-xml="select1"><span lang="en" class="option-label active" data-itext-id="/data/community_health_volunteer/gender/female:label">Female</span><span lang="sw" class="option-label " data-itext-id="/data/community_health_volunteer/gender/female:label">Kike</span></label>
+</div>
+</fieldset>
+<span class="or-required-msg active" lang="" data-i18n="constraint.required">This field is required</span>
+</fieldset>
+<label class="question non-select "><span lang="en" class="question-label active" data-itext-id="/data/community_health_volunteer/dob:label">Date of Birth</span><span lang="sw" class="question-label " data-itext-id="/data/community_health_volunteer/dob:label">Tarehe ya kuzaliwa</span><span class="required">*</span><input type="date" name="/data/community_health_volunteer/dob" data-required="true()" data-constraint="floor( difference-in-months( . , today() ) div 12 ) &gt;=18 and floor( difference-in-months( . , today() ) div 12 ) &lt;= 100" data-type-xml="date"><span lang="" class="or-constraint-msg active">Age must be between 18 and 100</span><span class="or-required-msg active" lang="" data-i18n="constraint.required">This field is required</span></label><label class="question non-select "><span lang="en" class="question-label active" data-itext-id="/data/community_health_volunteer/primary_phone:label">Primary Mobile Number</span><span lang="sw" class="question-label " data-itext-id="/data/community_health_volunteer/primary_phone:label">Namba ya simu</span><span class="required">*</span><input type="tel" name="/data/community_health_volunteer/primary_phone" data-required="true()" data-constraint="true()" data-type-xml="tel"><span lang="" class="or-constraint-msg active">Please enter a valid local number, or use the standard international format, which includes a plus sign (+) and country code. For example: +254712345678</span><span class="or-required-msg active" lang="" data-i18n="constraint.required">This field is required</span></label><section class="or-group-data or-appearance-hidden " name="/data/community_health_volunteer/meta">
+      </section>
+      </section>
+  
+<fieldset id="or-calculated-items" style="display:none;">
+<label class="calculation non-select "><input type="hidden" name="/data/community_health_volunteer/meta/created_by" data-calculate="../../../inputs/user/name" data-type-xml="string"></label><label class="calculation non-select "><input type="hidden" name="/data/community_health_volunteer/meta/created_by_person_uuid" data-calculate="../../../inputs/user/contact_id" data-type-xml="string"></label><label class="calculation non-select "><input type="hidden" name="/data/community_health_volunteer/meta/created_by_place_uuid" data-calculate="../../../inputs/user/facility_id" data-type-xml="string"></label><label class="calculation non-select "><input type="hidden" name="/data/meta/instanceID" data-calculate="concat('uuid:', uuid())" data-type-xml="string"></label>
+</fieldset>
+</form>

@@ -1,0 +1,65 @@
+
+  <model>
+    <instance>
+        <data xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" id="contact:area_supervisor_region:create" prefix="J1!contact:area_supervisor_region:create!" delimiter="#" version="2023-11-08  15-19">
+          <inputs>
+            <meta>
+              <location>
+                <lat/>
+                <long/>
+                <error/>
+                <message/>
+              </location>
+            </meta>
+            <user>
+              <contact_id/>
+              <facility_id/>
+              <name/>
+            </user>
+          </inputs>
+          <init>
+            <create_new_person/>
+            <select_person/>
+            <name/>
+            <contact_name/>
+            <custom_place_name/>
+            <place_type>PLACE_TYPE</place_type>
+            <place_type_translation/>
+            <generated_name>PLACE_TYPE</generated_name>
+            <generated_name_translation/>
+          </init>
+          <contact>
+            <parent>PARENT</parent>
+            <type>contact</type>
+            <contact_type>area_community_health_supervisor</contact_type>
+            <name/>
+            <phone/>
+            <phone_alternate/>
+            <meta tag="hidden">
+              <created_by/>
+              <created_by_person_uuid/>
+              <created_by_place_uuid/>
+            </meta>
+          </contact>
+          <PLACE_TYPE>
+            <parent>PARENT</parent>
+            <type/>
+            <is_name_generated>true</is_name_generated>
+            <manual_name/>
+            <name/>
+            <notes/>
+            <contact/>
+            <geolocation/>
+            <meta tag="hidden">
+              <created_by/>
+              <created_by_person_uuid/>
+              <created_by_place_uuid/>
+            </meta>
+          </PLACE_TYPE>
+          <meta tag="hidden">
+            <instanceID/>
+          </meta>
+        </data>
+      </instance>
+  </model>
+
